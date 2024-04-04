@@ -4,11 +4,11 @@ This is a demo for the Authzen interop using an open source decision service for
 Kogito uses Drools as its rule engine, see https://www.drools.org/
 
 The model and logic is all in DMN. The file is: resources/mytodo.dmn.
-The generated documentation for the decision model is [here](doc/Documentation-evaluations.html)
+The generated documentation for the decision model is [here](https://htmlpreview.github.io?https://github.com/eazerad/authzen-interop-kogito-quarkus/blob/main/doc/Documentation-evaluations.html)
 
-The only java code is for the "PIP", to read the list of users as the interop scenario requires to look up user info. See org.openid.authzen.Users.java
+The only code in Java is for the "PIP", to read the list of users as the interop scenario requires to look up user info. See org.openid.authzen.Users.java
 
-To read the DMN file, if you are using VSCode, install the extension: https://docs.kogito.kie.org/latest/html_single/#proc-kogito-vscode-extension_kogito-creating-running
+To read the DMN file, if you are using VSCode, install the extension "Kogito Bundle" - More details in the Kogito documentation: https://docs.kogito.kie.org/latest/html_single/#proc-kogito-vscode-extension_kogito-creating-running
 
 There are plenty of resources to learn about DMN and the FEEL expression language.
 DMN and FEEL standards are maintained by the Object Management Group (OMG) group: https://www.omg.org/spec/DMN/
