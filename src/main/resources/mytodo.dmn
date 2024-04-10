@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_28A0860B-D4E4-48A4-8D10-1C1374BDC249" name="evaluations" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307">
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_28A0860B-D4E4-48A4-8D10-1C1374BDC249" name="evaluation" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307">
   <dmn:extensionElements/>
   <dmn:itemDefinition id="_5154413A-2A79-45E3-AA19-57B0254EDF5F" name="tSubject" isCollection="false">
     <dmn:itemComponent id="_67BD9711-4F81-437D-8030-6646C5277772" name="identity" isCollection="false">
@@ -217,10 +217,10 @@
         <kie:ComponentsWidthsExtension>
           <kie:ComponentWidths dmnElementRef="_D7F7F4DD-5605-4BD6-B7F8-353A421FB911">
             <kie:width>50</kie:width>
-            <kie:width>309</kie:width>
-            <kie:width>936</kie:width>
             <kie:width>100</kie:width>
-            <kie:width>288</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_C5B75FC7-C122-461D-8F4A-8F10A745453C">
             <kie:width>50</kie:width>
@@ -339,10 +339,10 @@
         <kie:ComponentsWidthsExtension>
           <kie:ComponentWidths dmnElementRef="_D7F7F4DD-5605-4BD6-B7F8-353A421FB911">
             <kie:width>50</kie:width>
-            <kie:width>309</kie:width>
-            <kie:width>936</kie:width>
             <kie:width>100</kie:width>
-            <kie:width>288</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
           </kie:ComponentWidths>
         </kie:ComponentsWidthsExtension>
       </di:extension>
