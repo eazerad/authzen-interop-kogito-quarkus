@@ -58,6 +58,7 @@ public class Users {
 
     public static boolean isRole(String id, String role) {
         Map<String, Object> user = getUser(id);
+        @SuppressWarnings("unchecked")
         List<String> roles = (List<String>) user.get("roles");
         if(roles!=null && roles.contains(role)) {
             return true;

@@ -21,8 +21,6 @@ package org.openid.authzen.ruleunit;
 import org.kie.api.runtime.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
