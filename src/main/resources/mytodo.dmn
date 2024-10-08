@@ -2,7 +2,10 @@
 <dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_28A0860B-D4E4-48A4-8D10-1C1374BDC249" name="evaluation" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_E8AC5FDD-C9FC-4CAC-A9FC-5F3379396307">
   <dmn:extensionElements/>
   <dmn:itemDefinition id="_5154413A-2A79-45E3-AA19-57B0254EDF5F" name="tSubject" isCollection="false">
-    <dmn:itemComponent id="_67BD9711-4F81-437D-8030-6646C5277772" name="identity" isCollection="false">
+    <dmn:itemComponent id="_1787282C-54E2-4A11-84E6-872CB1B76B69" name="identity" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_67BD9711-4F81-437D-8030-6646C5277772" name="id" isCollection="false">
       <dmn:typeRef>string</dmn:typeRef>
     </dmn:itemComponent>
   </dmn:itemDefinition>
@@ -13,10 +16,12 @@
     </dmn:itemComponent>
   </dmn:itemDefinition>
   <dmn:itemDefinition id="_C06F4835-C4D3-4D34-B82F-8ADC74C0D6BA" name="tResource" isCollection="false">
-    <dmn:itemComponent id="_090FF55B-9D18-46FE-854F-BCA5B3FB5A81" name="userID" isCollection="false">
-      <dmn:typeRef>string</dmn:typeRef>
+    <dmn:itemComponent id="_DE657CDA-24B9-45AA-8412-3E0476E8276B" name="properties" isCollection="false">
+      <dmn:itemComponent id="_D6C34A50-C196-4249-B4D4-5FA1B9D446C4" name="ownerID" isCollection="false">
+        <dmn:typeRef>Any</dmn:typeRef>
+      </dmn:itemComponent>
     </dmn:itemComponent>
-    <dmn:itemComponent id="_E530DDE7-A397-46DC-A857-C9D25D03252C" name="ownerID" isCollection="false">
+    <dmn:itemComponent id="_090FF55B-9D18-46FE-854F-BCA5B3FB5A81" name="id" isCollection="false">
       <dmn:typeRef>string</dmn:typeRef>
     </dmn:itemComponent>
     <dmn:itemComponent id="_20ECD5B5-19E9-4F6B-B3C6-25D74D68DFF8" name="type" isCollection="false">
@@ -70,7 +75,7 @@
       </dmn:input>
       <dmn:input id="_A76E094D-37B1-4488-AD50-FEEFD59C8886">
         <dmn:inputExpression id="_859DA2D6-E2D3-43D5-8525-3B73253BBB58" typeRef="string">
-          <dmn:text>subject.identity</dmn:text>
+          <dmn:text>subject.id</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
       <dmn:output id="_DE18046D-D2B1-46E3-95AD-23409D036DD7"/>
@@ -108,7 +113,7 @@
           <dmn:text>"can_update_todo" , "can_delete_todo"</dmn:text>
         </dmn:inputEntry>
         <dmn:inputEntry id="_9E96304F-6DC2-494A-B2DD-08359C6303AC">
-          <dmn:text>(isRole(?,"editor") or isRole(?,"admin") or isRole(?,"evil_genius")) and matches( getUser(?).id , resource.ownerID )</dmn:text>
+          <dmn:text>(isRole(?,"editor") or isRole(?,"admin") or isRole(?,"evil_genius")) and matches( getUser(?).id , resource.properties.ownerID )</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_F72370C8-BCC3-4E25-AEFB-BE7380DC2A04">
           <dmn:text>true</dmn:text>
@@ -217,8 +222,8 @@
         <kie:ComponentsWidthsExtension>
           <kie:ComponentWidths dmnElementRef="_D7F7F4DD-5605-4BD6-B7F8-353A421FB911">
             <kie:width>50</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
+            <kie:width>271</kie:width>
+            <kie:width>343</kie:width>
             <kie:width>100</kie:width>
             <kie:width>100</kie:width>
           </kie:ComponentWidths>
@@ -288,7 +293,7 @@
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="184.59813084112147" y="234" width="95" height="50"/>
+        <dc:Bounds x="184.83411214953273" y="234" width="95" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
       <dmndi:DMNShape id="dmnshape-drg-_39449E71-94B0-4A63-8B58-BFAE41D4C7ED" dmnElementRef="_39449E71-94B0-4A63-8B58-BFAE41D4C7ED" isCollapsed="false">
@@ -326,11 +331,11 @@
         <di:waypoint x="421" y="151"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_A8800AF2-DFBA-4BA0-8046-5D9F516C2942" dmnElementRef="_A8800AF2-DFBA-4BA0-8046-5D9F516C2942">
-        <di:waypoint x="232.09813084112147" y="259"/>
+        <di:waypoint x="232.33411214953276" y="259"/>
         <di:waypoint x="421" y="151"/>
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="dmnedge-drg-_EFD0CCC9-BD0E-484E-B120-E31E4CE0B219-AUTO-SOURCE" dmnElementRef="_EFD0CCC9-BD0E-484E-B120-E31E4CE0B219">
-        <di:waypoint x="279.5981308411215" y="259"/>
+        <di:waypoint x="279.83411214953276" y="259"/>
         <di:waypoint x="232.29906542056074" y="191.68421052631578"/>
       </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
@@ -339,8 +344,8 @@
         <kie:ComponentsWidthsExtension>
           <kie:ComponentWidths dmnElementRef="_D7F7F4DD-5605-4BD6-B7F8-353A421FB911">
             <kie:width>50</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
+            <kie:width>271</kie:width>
+            <kie:width>343</kie:width>
             <kie:width>100</kie:width>
             <kie:width>100</kie:width>
           </kie:ComponentWidths>

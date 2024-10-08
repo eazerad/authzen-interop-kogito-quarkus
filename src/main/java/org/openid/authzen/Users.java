@@ -3,6 +3,7 @@ package org.openid.authzen;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -28,11 +29,12 @@ public class Users {
      */
     @SuppressWarnings("unchecked")
     public static Map<String, Object> getUser(String userId) {
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(USERS_FILE);
-        ObjectMapper mapper = new ObjectMapper();
         try {
                 // read only once the file and keep the map in memory.
                 if(usersMap == null) {
+                    InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(USERS_FILE);
+                    ObjectMapper mapper = new ObjectMapper();
+            
                     synchronized(Users.class) {
                         usersMap = mapper.readValue(is, Map.class);
                     }
@@ -52,6 +54,15 @@ public class Users {
 
         return Collections.emptyMap();
 
+    }
+
+    public static boolean isRole(String id, String role) {
+        Map<String, Object> user = getUser(id);
+        List<String> roles = (List<String>) user.get("roles");
+        if(roles!=null && roles.contains(role)) {
+            return true;
+        }
+        return false;
     }
 
 

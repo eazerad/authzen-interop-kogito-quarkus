@@ -1,0 +1,84 @@
+package org.openid.authzen.ruleunit;
+
+import org.openid.authzen.ruleunit.Resource;
+import org.openid.authzen.ruleunit.Subject;
+import org.openid.authzen.ruleunit.Evaluation;
+import org.openid.authzen.ruleunit.EvaluationResult;
+
+import org.openid.authzen.Users;
+
+import java.util.List;
+import java.util.ArrayList;
+
+global EvaluationWrapper evaluations;
+
+
+rule CanRead
+salience 60
+when
+    $a: Action( name == "can_read_user" || name == "can_read_todos" )
+    $e: Evaluation()
+then
+    modify($e) { setDecision(true) };
+end
+
+rule CanCreateTodos
+salience 50
+when
+    $a: Action( name == "can_create_todo" )
+    $s: Subject( Users.isRole(id, "editor") 
+                || Users.isRole(id, "admin") 
+                || Users.isRole(id, "evil_genius") )
+    $e: Evaluation()
+then
+    modify($e) { setDecision(true) };
+end
+
+rule CanUpdateOrDeleteTodos
+salience 40
+when
+    $a: Action( name == "can_update_todo" 
+                || name == "can_update_todos"
+                || name == "can_delete_todo" )
+    $e: Evaluation()
+    $s: Subject( (Users.isRole(id, "editor") 
+                || Users.isRole(id, "admin") 
+                || Users.isRole(id, "evil_genius")) 
+                && Users.getUser(id).get("id") == $e.getResource().getProperties().getOwnerID() )
+then
+    modify($e) { setDecision(true) };
+end
+
+
+rule CanDeleteTodos
+salience 30
+when
+    $a: Action( name == "can_delete_todo" )
+    $s: Subject( Users.isRole(id, "admin") )
+    $e: Evaluation()
+then
+    modify($e) { setDecision(true) };
+end
+
+rule CanupdateTodos
+salience 20
+when
+    $a: Action( name == "can_update_todo" || name == "can_update_todos" )
+    $s: Subject( Users.isRole(id, "evil_genius") )
+    $e: Evaluation()
+then
+    modify($e) { setDecision(true) };
+end
+
+
+rule AddResult
+salience 0
+when
+    $e: Evaluation()
+then
+    EvaluationResult ev = new EvaluationResult();
+    ev.setDecision($e.getDecision());
+    evaluations.getEvaluations().add(ev);
+end
+
+

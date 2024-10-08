@@ -1,0 +1,52 @@
+package org.openid.authzen.ruleunit;
+
+import org.drools.ruleunits.api.RuleUnitData;
+import org.drools.ruleunits.api.SingletonStore;
+import org.drools.ruleunits.api.DataSource;
+import org.drools.ruleunits.api.DataStore;
+
+
+
+public class EvaluationsUnit implements RuleUnitData {
+    private SingletonStore<Subject> subject;
+    private SingletonStore<Action> action;
+    private SingletonStore<Context> context;
+    private DataStore<Evaluations> evaluations;
+    
+
+    public EvaluationsUnit() {
+        this(DataSource.createSingleton(),
+        DataSource.createSingleton(),
+        DataSource.createSingleton(),
+        DataSource.createStore());
+    }
+
+    public EvaluationsUnit(
+        SingletonStore<Subject> subject,
+        SingletonStore<Action> action,
+        SingletonStore<Context> context,
+        DataStore<Evaluations> evaluations) {
+            this.subject = subject;
+            this.action = action;
+            this.context = context;
+            this.evaluations = evaluations;
+    }
+
+    public SingletonStore<Subject> getSubject() {
+        return subject;
+    }
+
+    public SingletonStore<Action> getAction() {
+        return action;
+    }    
+    
+    public DataStore<Evaluations> getEvaluations() {
+        return evaluations;
+    }
+
+    public SingletonStore<Context> getContext() {
+        return context;
+    }
+
+    
+}
