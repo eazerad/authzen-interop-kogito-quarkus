@@ -1,4 +1,6 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.evaluations;
+
+import org.openid.authzen.model.Resource;
 
 public class Evaluation {
     private Resource resource;

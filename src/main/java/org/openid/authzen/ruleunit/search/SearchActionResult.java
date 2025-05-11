@@ -1,12 +1,13 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.search;
 
-public class Action {
+public class SearchActionResult implements SearchResult {
     private String name;
-
-    public Action() {
+    
+    public SearchActionResult() {
     }
 
-    public Action(String name) {
+
+    public SearchActionResult(String name) {
         this.name = name;
     }
 
