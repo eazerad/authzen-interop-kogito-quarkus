@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.openid.authzen.Users;
 import org.openid.authzen.model.Record;
@@ -32,6 +33,7 @@ public class Utils {
      * Get a the list of users.
      * @return the list.
      */
+    //@SuppressWarnings("unchecked")
     public static List<User> getUsers() {
         try {
                 // read only once the file and keep the map in memory.
@@ -41,6 +43,8 @@ public class Utils {
             
                     synchronized(Utils.class) {
                         usersList = mapper.readValue(is, new TypeReference<List<User>>() {});
+                        //usersList = mapper.readValue(is,  List.class);
+
                         logger.info("Loaded users from file: "+USERS_FILE);
                     }
                 }
@@ -61,6 +65,7 @@ public class Utils {
     }
 
 
+    //@SuppressWarnings("unchecked")
     public static List<Record> getRecords() {
         try {
                 // read only once the file and keep the map in memory.
@@ -70,6 +75,8 @@ public class Utils {
             
                     synchronized(Utils.class) {
                         recordsList = mapper.readValue(is, new TypeReference<List<Record>>() {});
+                        //recordsList = mapper.readValue(is,  List.class);
+
                     }
                 }
         } catch (StreamReadException e) {

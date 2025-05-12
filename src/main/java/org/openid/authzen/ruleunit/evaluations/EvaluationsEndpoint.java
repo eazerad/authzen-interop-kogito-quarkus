@@ -27,7 +27,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/evaluations")
+@Path("access/v1/evaluations")
 public class EvaluationsEndpoint {
 
     @Inject

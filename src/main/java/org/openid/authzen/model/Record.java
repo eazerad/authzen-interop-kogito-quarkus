@@ -1,5 +1,8 @@
 package org.openid.authzen.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class Record {
 
     private String id;

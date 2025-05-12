@@ -1,10 +1,14 @@
 package org.openid.authzen.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class User {
     private String id;
     private String role;
     private String department;
-
+    public User() {
+    }
     public String getId() {
         return id;
     }

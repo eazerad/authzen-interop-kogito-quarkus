@@ -12,24 +12,27 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.5.3</quarkus.platform.version>
+    <quarkus.platform.version>3.15.3</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>10.0.0</kogito.bom.version>
     <enable.runtime.typecheck>true</enable.runtime.typecheck>
 
     <skipITs>true</skipITs>
-    <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+    <surefire-plugin.version>3.5.2</surefire-plugin.version>
   </properties>
   <dependencyManagement>
     <dependencies>
-
       <dependency>
         <groupId>org.mvel</groupId>
         <artifactId>mvel2</artifactId>
         <version>2.5.1.Final</version>
       </dependency>
-
+      <dependency>
+        <groupId>net.minidev</groupId>
+        <artifactId>json-smart</artifactId>
+        <version>2.5.0</version>
+      </dependency>
       <dependency>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>${quarkus.platform.artifact-id}</artifactId>
@@ -44,6 +47,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-resteasy-reactive-spi-deployment</artifactId>
+        <version>3.5.3</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -55,27 +63,12 @@
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-quarkus-rules</artifactId>
-      <version>${kogito.bom.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.drools</groupId>
       <artifactId>drools-quarkus-decisions</artifactId>
     </dependency>
-    <!--<dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-reactive-jackson</artifactId>
-      <version>${quarkus.platform.version}</version>
-    </dependency>-->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
-   <!--<dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-reactive</artifactId>
-      <version>${quarkus.platform.version}</version>
-    </dependency> -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -86,7 +79,6 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
@@ -95,17 +87,14 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-
   </dependencies>
   <build>
     <plugins>

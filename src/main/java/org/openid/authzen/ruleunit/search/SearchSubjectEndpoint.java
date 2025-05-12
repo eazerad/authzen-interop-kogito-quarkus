@@ -31,7 +31,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("search/subject")
+@Path("access/v1/search/subject")
 public class SearchSubjectEndpoint {
     private static Logger logger = LoggerFactory.getLogger(SearchSubjectEndpoint.class);
 
