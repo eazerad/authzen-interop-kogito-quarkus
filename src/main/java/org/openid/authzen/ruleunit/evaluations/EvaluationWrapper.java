@@ -1,4 +1,4 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.evaluations;
 import java.util.ArrayList;
 import java.util.List;
 

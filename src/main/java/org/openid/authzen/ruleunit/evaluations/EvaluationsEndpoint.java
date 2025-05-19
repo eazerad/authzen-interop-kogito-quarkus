@@ -16,24 +16,23 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.evaluations;
 
 import org.kie.api.runtime.KieRuntimeBuilder;
 import org.kie.api.runtime.KieSession;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
-
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-@Path("/evaluations")
+@Path("access/v1/evaluations")
 public class EvaluationsEndpoint {
 
     @Inject
     KieRuntimeBuilder kieRuntimeBuilder;
+
 
     @POST()
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,19 +40,17 @@ public class EvaluationsEndpoint {
     public EvaluationWrapper executeQuery(EvaluationsDto evalDto) {
         KieSession session = kieRuntimeBuilder.newKieSession();
 
-        //List<Evaluation> evaluations = new ArrayList<Evaluation>();
         EvaluationWrapper wrapper = new EvaluationWrapper();
         session.setGlobal("evaluations", wrapper);
-
+    
         evalDto.evaluations.forEach(session::insert);
+
+        session.insert(new EvaluationsType("boxcaring"));
         session.insert(evalDto.subject);
         session.insert(evalDto.action);
         session.insert(evalDto.context);
 
-        //loanDto.getLoanApplications().forEach(session::insert);
         session.fireAllRules();
-
-        //evaluations.add(new Evaluations());
 
         return wrapper;
     }

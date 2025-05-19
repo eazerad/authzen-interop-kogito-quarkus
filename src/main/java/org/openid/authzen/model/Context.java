@@ -1,4 +1,4 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.model;
 
 public class Context {
 

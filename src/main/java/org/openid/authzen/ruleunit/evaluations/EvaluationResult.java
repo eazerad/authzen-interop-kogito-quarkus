@@ -1,4 +1,4 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.evaluations;
 
 public class EvaluationResult {
     private Boolean decision = false;

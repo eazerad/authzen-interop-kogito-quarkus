@@ -1,6 +1,7 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.model;
 
-public class Subject {
+
+public class Subject extends Properties {
     private String id;
     private String type;
 
@@ -28,4 +29,5 @@ public class Subject {
         this.type = type;
     }
 
+    
 }

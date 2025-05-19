@@ -1,9 +1,11 @@
-package org.openid.authzen.ruleunit;
+package org.openid.authzen.ruleunit.evaluations;
 
-import org.openid.authzen.ruleunit.Resource;
-import org.openid.authzen.ruleunit.Subject;
-import org.openid.authzen.ruleunit.Evaluation;
-import org.openid.authzen.ruleunit.EvaluationResult;
+import org.openid.authzen.model.Resource;
+import org.openid.authzen.model.Subject;
+import org.openid.authzen.model.Action;
+import org.openid.authzen.ruleunit.evaluations.Evaluation;
+import org.openid.authzen.ruleunit.evaluations.EvaluationResult;
+import org.openid.authzen.ruleunit.evaluations.EvaluationsType;
 
 import org.openid.authzen.Users;
 
@@ -16,7 +18,8 @@ global EvaluationWrapper evaluations;
 rule CanRead
 salience 60
 when
-    $a: Action( name == "can_read_user" || name == "can_read_todos" )
+    $etype: EvaluationsType( type == "boxcaring")
+    $a: Action( name == "can_read_user" || name == "can_read_todos")
     $e: Evaluation()
 then
     modify($e) { setDecision(true) };
@@ -25,6 +28,7 @@ end
 rule CanCreateTodos
 salience 50
 when
+    $etype: EvaluationsType( type == "boxcaring")
     $a: Action( name == "can_create_todo" )
     $s: Subject( Users.isRole(id, "editor") 
                 || Users.isRole(id, "admin") 
@@ -37,6 +41,7 @@ end
 rule CanUpdateOrDeleteTodos
 salience 40
 when
+    $etype: EvaluationsType( type == "boxcaring")
     $a: Action( name == "can_update_todo" 
                 || name == "can_update_todos"
                 || name == "can_delete_todo" )
@@ -44,7 +49,8 @@ when
     $s: Subject( (Users.isRole(id, "editor") 
                 || Users.isRole(id, "admin") 
                 || Users.isRole(id, "evil_genius")) 
-                && Users.getUser(id).get("id") == $e.getResource().getProperties().getOwnerID() )
+                //&& Users.getUser(id).get("id") == $e.getResource().getProperties().getOwnerID() )
+                && Users.getUser(id).get("id") == $e.getResource().getProperties().get("ownerID") )
 then
     modify($e) { setDecision(true) };
 end
@@ -53,6 +59,7 @@ end
 rule CanDeleteTodos
 salience 30
 when
+    $etype: EvaluationsType( type == "boxcaring")
     $a: Action( name == "can_delete_todo" )
     $s: Subject( Users.isRole(id, "admin") )
     $e: Evaluation()
@@ -63,6 +70,7 @@ end
 rule CanupdateTodos
 salience 20
 when
+    $etype: EvaluationsType( type == "boxcaring")
     $a: Action( name == "can_update_todo" || name == "can_update_todos" )
     $s: Subject( Users.isRole(id, "evil_genius") )
     $e: Evaluation()
@@ -74,6 +82,7 @@ end
 rule AddResult
 salience 0
 when
+    $etype: EvaluationsType( type == "boxcaring")
     $e: Evaluation()
 then
     EvaluationResult ev = new EvaluationResult();

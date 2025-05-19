@@ -1,0 +1,170 @@
+package org.openid.authzen.ruleunit;
+
+import org.openid.authzen.model.Resource;
+import org.openid.authzen.model.Subject;
+import org.openid.authzen.model.Action;
+import org.openid.authzen.model.Record;
+import org.openid.authzen.model.User;
+import org.openid.authzen.ruleunit.search.Utils;
+import org.openid.authzen.ruleunit.search.SearchActionResult;
+import org.openid.authzen.ruleunit.search.SearchResourceResult;
+import org.openid.authzen.ruleunit.search.SearchSubjectResult;
+import org.openid.authzen.ruleunit.search.ResultWrapper;
+import org.openid.authzen.ruleunit.search.SearchType;
+
+
+import java.util.List;
+import java.util.ArrayList;
+
+global ResultWrapper results;
+
+
+rule "Resource Search - Can View"
+when
+    $st: SearchType( type == "resource" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "view" )
+    $r: Resource ( type == "record" )
+    $u: User ( id == $s.id)
+    $rec: Record ( owner == $u.id 
+        || department == $u.department 
+        || $u.role == "manager" )
+then
+    SearchResourceResult res = new SearchResourceResult();
+    res.setId($rec.getId());
+    res.setType("record");
+    results.getResults().add(res);
+end
+
+rule "Resource Search - Can Edit"
+when
+    $st: SearchType( type == "resource" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "edit" )
+    $r: Resource ( type == "record" )
+    $u: User ( id == $s.id)
+    $rec: Record ( owner == $u.id 
+        || (department == $u.department 
+            && $u.role == "manager" ))
+then
+    SearchResourceResult res = new SearchResourceResult();
+    res.setId($rec.getId());
+    res.setType("record");
+    results.getResults().add(res);
+end
+
+
+rule "Resource Search - Can Delete"
+when
+    $st: SearchType( type == "resource" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "delete" )
+    $r: Resource ( type == "record" )
+    $u: User ( id == $s.id)
+    $rec: Record ( owner == $u.id )
+then
+    SearchResourceResult res = new SearchResourceResult();
+    res.setId($rec.getId());
+    res.setType("record");
+    results.getResults().add(res);
+end
+
+rule "Subject Search - Can View"
+when
+    $st: SearchType( type == "subject" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "view" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( role == "manager" 
+            || id == $rec.owner 
+            || department == $rec.department )
+then
+    SearchSubjectResult res = new SearchSubjectResult();
+    res.setId($user.getId());
+    res.setType("user");
+    results.getResults().add(res);
+end
+
+rule "Subject Search - Can Edit"
+when
+    $st: SearchType( type == "subject" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "edit" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( id == $rec.owner 
+                || (role == "manager" && department == $rec.department ))
+then
+    SearchSubjectResult res = new SearchSubjectResult();
+    res.setId($user.getId());
+    res.setType("user");
+    results.getResults().add(res);
+end
+
+
+rule "Subject Search - Can Delete"
+when
+    $st: SearchType( type == "subject" )
+    $s: Subject ( type == "user" )
+    $a: Action ( name == "delete" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( id == $rec.owner )
+then
+    SearchSubjectResult res = new SearchSubjectResult();
+    res.setId($user.getId());
+    res.setType("user");
+    results.getResults().add(res);
+end
+
+rule "Action Search - View"
+when
+    $st: SearchType( type == "action" )
+    $s: Subject ( type == "user" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( id == $s.id 
+                    && ($rec.owner == id 
+                        || $rec.department == department 
+                        || role == "manager" ))
+then
+    Action act = new Action("view");
+    SearchActionResult res = new SearchActionResult();
+    res.setName(act.getName());
+    results.getResults().add(res);
+end
+
+rule "Action Search - Edit"
+when
+    $st: SearchType( type == "action" )
+    $s: Subject ( type == "user" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( id == $s.id 
+                    && ( id == $rec.owner 
+                        || ( department == $rec.department
+                            && role == "manager" )))
+then
+    Action act = new Action("edit");
+    SearchActionResult res = new SearchActionResult();
+    res.setName(act.getName());
+    results.getResults().add(res);
+end
+
+rule "Action Search - Delete"
+when
+    $st: SearchType( type == "action" )
+    $s: Subject ( type == "user" )
+    $r: Resource ( type == "record" )
+    $rec: Record ( id == $r.id )
+    $user: User ( id == $s.id 
+                && id == $rec.owner )
+then
+    Action act = new Action("delete");
+    SearchActionResult res = new SearchActionResult();
+    res.setName(act.getName());
+    results.getResults().add(res);
+end
+
+
