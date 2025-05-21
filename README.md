@@ -56,9 +56,9 @@ I'm planning to use DMN for everything in a future attempt (less code, easier fo
 
 For the Search APIs, the  Java model (aka POJO classes) for the input/output objects is under `scr/main/java/org/openid/authzen/model`  
 The code to expose the 3 search endpoints is in `scr/main/java/org/openid/authzen/ruleunit/search`  
-If you look at the subject search API REST endpoint `/Users/elieaz/code/authzen-interop-kogito-quarkus/src/main/java/org/openid/authzen/ruleunit/search/SearchSubjectEndpoint`, you will see that we insert the subject, action and resource in the working memory so the rule engine,Drools, can pick it up.  
+If you look at the subject search API REST endpoint `src/main/java/org/openid/authzen/ruleunit/search/SearchSubjectEndpoint`, you will see that we insert the subject, action and resource in the working memory so the rule engine,Drools, can pick it up.  
 The users and resources (loaded from an external database, here for simplicity we load from JSON files) are also inserted in the working memory. Note that we would prefer to have the objects passed as input to the decision service, it is not a good idea to do look up at runtime as it will impact performance.
-The rules for all 3 search endpoints are defined in: `/Users/elieaz/code/authzen-interop-kogito-quarkus/src/main/resources/search.drl`
+The rules for all 3 search endpoints are defined in: `src/main/resources/search.drl`
 The authorization logic will have to be modified depending on the specific requirements (here we focused on the interop use cases).
 
 
